@@ -2,7 +2,7 @@
 
 ## 项目简介
 
->1. 基于grequests的简单多进程异步爬虫框架
+>1. 基于grequests的简单协程爬虫框架
 >2. 本爬虫框架基于广度优先爬虫设计
 >3. 本爬虫框架默认支持两层爬行深度（可自行添加多层index索引页到redis中间件内，以提升爬虫深度）
 >4. 框架执行流程：data_file -> start_url -> start_redis_hash -> downloader -> index_redis_hash -> downloader -> detail_postgresql_table
