@@ -17,9 +17,9 @@ from util import logger
 
 class Downloader():
 
-    def __init__(self, urls):
+    def __init__(self, urls, headers):
         self.urls = urls
-        self.headers = config.DOWNLOADER_HEADERS
+        self.headers = headers
         self.timeout = config.DOWNLOADER_TIMEOUT
         self.size = config.DOWNLOADER_SIZE
         self.proxy_count = config.DOWNLOADER_PROXY_COUNT
@@ -27,13 +27,13 @@ class Downloader():
         self.logger = logger.Logger()
     
     def downloader(self):
-        urls = self.urls
-        headers = self.headers
-        proxies = self.__proxies()
-        timeout = self.timeout
-        size = self.size
-        mapping = [grequests.get(url=url, headers=headers, proxies=choice(proxies), timeout=timeout) for url in urls]
-        responses = grequests.imap(mapping, size=size, exception_handler=self.__handler)
+        '''
+        only support get request (overwrite downloader to support post request)
+        urls: list type, http or https urls
+        headers: dict type, request headers
+        '''
+        mapping = [grequests.get(url=url, headers=self.headers, proxies=choice(self.__proxies()), timeout=self.timeout) for url in self.urls]
+        responses = grequests.imap(mapping, size=self.size, exception_handler=self.__handler)
         return responses
 
     def parser(self, parser_response, parser_function, error_function):
@@ -55,7 +55,13 @@ class Downloader():
                 error_function(response=parser_response)
 
     def __proxies(self):
+        '''
+        get proxies form redis
+        '''
         return self.dbredis.get_proxy(count=self.proxy_count)
 
     def __handler(self, request, exception):
+        '''
+        error handler
+        '''
         return request.url

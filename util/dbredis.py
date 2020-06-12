@@ -28,6 +28,9 @@ class DBRedis():
         self.logger = logger.Logger()
 
     def get_proxy(self, count=None):
+        '''
+        get proxy from redis
+        '''
         try:
             proxys = []
             for item in list(self.redis.hgetall(name=self.proxy_name).items())[:count]:
@@ -38,6 +41,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <get proxy> {error}')
 
     def clear_start(self):
+        '''
+        clear redis start hash
+        '''
         try:
             self.redis.delete(self.start_name)
         except Exception:
@@ -45,6 +51,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <clear start> {error}')
 
     def set_start(self, key, value):
+        '''
+        set start url to start hash
+        '''
         try:
             self.redis.hset(self.start_name, str(key), str(value))
         except Exception:
@@ -52,6 +61,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <set start> {error}')
     
     def len_start(self):
+        '''
+        get start hash length
+        '''
         try:
             return self.redis.hlen(self.start_name)
         except Exception:
@@ -59,6 +71,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <len start> {error}')
 
     def get_start(self):
+        '''
+        get start url list from start hash
+        '''
         try:
             indexes = []
             for item in list(self.redis.hgetall(name=self.start_name).items())[:self.start_count]:
@@ -70,6 +85,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <get start> {error}')
 
     def clear_index(self):
+        '''
+        clear redis index hash
+        '''
         try:
             self.redis.delete(self.index_name)
         except Exception:
@@ -77,6 +95,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <clear index> {error}')
 
     def set_index(self, key, value):
+        '''
+        set index url to index hash
+        '''
         try:
             self.redis.hset(self.index_name, str(key), str(value))
         except Exception:
@@ -84,6 +105,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <set index> {error}')
     
     def len_index(self):
+        '''
+        get index hash length
+        '''
         try:
             return self.redis.hlen(self.index_name)
         except Exception:
@@ -91,6 +115,9 @@ class DBRedis():
             self.logger.error(message=f'<redis> <len index> {error}')
 
     def get_index(self):
+        '''
+        get index url list from index hash
+        '''
         try:
             indexes = []
             for item in list(self.redis.hgetall(name=self.index_name).items())[:self.index_count]:

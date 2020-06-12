@@ -21,16 +21,29 @@ class CrawlIndex():
             self.datas = [data.replace('\n', '') for data in datafile.readlines()]
 
     def crawl(self):
+        '''
+        main crawler function
+        '''
         self.__start_url()
         while self.dbredis.len_start() > 0:
             urls = self.dbredis.get_start()
-            download = downloader.Downloader(urls=urls)
+            download = downloader.Downloader(urls=urls, headers=self.__headers())
             responses = download.downloader()
             for response in responses:
                 download.parser(parser_response=response, parser_function=self.__parser_function, error_function=self.__error_function)
 
     def __start_url(self):
+        '''
+        construct initial url
+        '''
         pass
+
+    def __headers(self):
+        '''
+        construct request header
+        '''
+        headers = {}
+        return headers
 
     def __parser_function(self, response):
         '''
@@ -45,6 +58,9 @@ class CrawlIndex():
         self.dbredis.set_start(response, 'retry')
 
     def __fixurl(self, url, params):
+        '''
+        fix url parameters
+        '''
         fix = ''
         for key, value in params.items():
             fix += f'&{key}={value}'

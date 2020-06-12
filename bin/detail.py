@@ -23,16 +23,29 @@ class CrawlDetail():
         self.logger = logger.Logger()
 
     def crawl(self):
+        '''
+        main crawler function
+        '''
         self.__create_table()
         while self.dbredis.len_index() > 0:
             urls = self.dbredis.get_index()
-            download = downloader.Downloader(urls=urls)
+            download = downloader.Downloader(urls=urls, headers=self.__headers())
             responses = download.downloader()
             for response in responses:
                 download.parser(parser_response=response, parser_function=self.__parser_function, error_function=self.__error_function)
 
     def __create_table(self):
+        '''
+        create storage table
+        '''
         pass
+
+    def __headers(self):
+        '''
+        construct request header
+        '''
+        headers = {}
+        return headers
 
     def __parser_function(self, response):
         '''

@@ -7,6 +7,7 @@
 >3. 本爬虫框架默认支持两层爬行深度（可自行添加多层index索引页到redis中间件内，以提升爬虫深度）
 >4. 框架执行流程：data_file -> start_url -> start_redis_hash -> downloader -> index_redis_hash -> downloader -> detail_postgresql_table
 >5. 上述流程中，downloader模块，parser方法需要传入response的解析函数和response的错误处理函数，一般情况下，仅需要编写index页和detail页的parser_function函数，即可实现爬虫
+>6. downloader模块暂只支持get请求，可重写downloader方法支持post请求
 
 ## 项目依赖
 

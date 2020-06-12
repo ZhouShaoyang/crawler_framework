@@ -19,10 +19,19 @@ class Logger():
         self.logger.basicConfig(level=logging.INFO, format=self.log_format, datefmt=self.date_format, filename=self.log_file)
 
     def info(self, message):
+        '''
+        info log
+        '''
         self.logger.info(msg=self.__formater(message=message))
 
     def error(self, message):
+        '''
+        error log
+        '''
         self.logger.error(msg=self.__formater(message=message))
 
     def __formater(self, message):
+        '''
+        format log message
+        '''
         return re.sub(re.compile(r'\s+'), ' ', message)

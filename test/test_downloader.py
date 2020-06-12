@@ -5,10 +5,13 @@ import sys
 ROOT = os.getcwd()
 sys.path.append(ROOT)
 
+import config
 from util import downloader
+
 
 def parser_func(response):
     print('parser_function:', response.text[0:31])
+
 
 def error_func(response):
     print('error_function:', response)
@@ -20,7 +23,8 @@ if __name__ == "__main__":
         'https://www.baidu.com',
         'https://www.baidu.com',
     ]
-    downloader = downloader.Downloader(urls=urls)
+    headers = config.DOWNLOADER_HEADERS
+    downloader = downloader.Downloader(urls=urls, headers=headers)
     responses = downloader.downloader()
     for response in responses:
         print('downloader:', response)

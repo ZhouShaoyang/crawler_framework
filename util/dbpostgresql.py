@@ -26,6 +26,9 @@ class DBPostgresql():
         self.logger = logger.Logger()
     
     def create(self, tablename, **kargs):
+        '''
+        kargs input: field='field type'
+        '''
         option = []
         for key, value in kargs.items():
             option.append(f'{key} {value}')
@@ -39,6 +42,9 @@ class DBPostgresql():
             self.conn.rollback()
         
     def insert(self, tablename, **kargs):
+        '''
+        kargs input: field='field value'
+        '''
         columns, values = [], []
         for key, value in kargs.items():
             columns.append(key)
@@ -57,6 +63,9 @@ class DBPostgresql():
             self.conn.rollback()
 
     def __clear(self, string):
+        '''
+        clear value
+        '''
         delete = re.compile(r'[\n\r\t\'\"]')
         result = re.sub(delete, '', string)
         return result
