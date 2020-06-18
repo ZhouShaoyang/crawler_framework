@@ -36,8 +36,6 @@ POSTGRE_DBNAME = 'crawler_framework'
 
 # [UTIL] TOOLS
 ## [DOWNLOADER]
-## REQUESTS HEADERS
-DOWNLOADER_HEADERS = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36 Edg/83.0.478.37'}
 ## REQUESTS TIMEOUT
 DOWNLOADER_TIMEOUT = 3
 ## GREQUESTS REQUEST SIZE

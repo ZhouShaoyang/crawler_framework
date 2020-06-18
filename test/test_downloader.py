@@ -16,6 +16,10 @@ def parser_func(response):
 def error_func(response):
     print('error_function:', response)
 
+def headers_func():
+    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 Edg/83.0.478.45'}
+    return headers
+
 
 if __name__ == "__main__":
     urls = [
@@ -23,8 +27,7 @@ if __name__ == "__main__":
         'https://www.baidu.com',
         'https://www.baidu.com',
     ]
-    headers = config.DOWNLOADER_HEADERS
-    downloader = downloader.Downloader(urls=urls, headers=headers)
+    downloader = downloader.Downloader(urls=urls, headers=headers_func())
     responses = downloader.downloader()
     for response in responses:
         print('downloader:', response)
