@@ -7,6 +7,6 @@ idna==2.9
 psycopg2==2.8.5
 redis==3.5.3
 requests==2.23.0
-urllib3==1.25.9
+urllib3==1.26.5
 zope.event==4.4
 zope.interface==5.1.0
